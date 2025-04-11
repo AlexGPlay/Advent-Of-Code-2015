@@ -1,5 +1,12 @@
-compile-problem-01: ./01/01.cpp
-	g++ -std=c++17 -Wall -Wextra ./01/01.cpp ./utils/readFile.cpp -o ./01/01.exe
+CXX = g++
+CXXFLAGS = -std=c++17 -Wall -Wextra
+UTILS = utils/readFile.cpp utils/split.cpp
 
-run-problem-01: compile-problem-01
-	./01/01.exe
+build-%:
+	$(CXX) $(CXXFLAGS) ./$*/$*.cpp $(UTILS) -o ./$*/$*.exe
+
+run-%: build-%
+	./$*/$*.exe
+
+01: run-01
+02: run-02
