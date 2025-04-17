@@ -118,7 +118,7 @@ bool executeOperation(Operation operation, std::map<std::string, unsigned short>
   return true;
 }
 
-void part1(std::vector<std::string> data){
+int part1(std::vector<std::string> data){
   std::map<std::string, unsigned short> map;
   std::deque<Operation> operations;
 
@@ -137,14 +137,20 @@ void part1(std::vector<std::string> data){
   }
 
   std::cout << map["a"] << std::endl;
+  return map["a"];
 }
 
-void part2(std::vector<std::string> data){
+void part2(std::vector<std::string> data, int bValue){
   std::map<std::string, unsigned short> map;
   std::deque<Operation> operations;
 
   for(const auto& line : data){
-    operations.push_back(parseLine(line));
+    Operation operation = parseLine(line);
+    if(operation.destination == "b"){
+      operation.operand1 = std::to_string(bValue);
+    }
+
+    operations.push_back(operation);
   }
 
   while(operations.size()){
@@ -162,10 +168,9 @@ void part2(std::vector<std::string> data){
 
 int main(){
   std::vector<std::string> data = readFileLines("./07/input.txt");
-  part1(data);
 
-  std::vector<std::string> data2 = readFileLines("./07/input-2.txt");
-  part2(data2);
+  int bValue = part1(data);
+  part2(data, bValue);
 
   return 0;
 }
