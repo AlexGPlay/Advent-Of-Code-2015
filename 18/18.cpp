@@ -1,11 +1,6 @@
 #include <iostream>
 #include "../utils/readFile.h"
 
-/**
- * A light which is on stays on when 2 or 3 neighbors are on, and turns off otherwise.
- * A light which is off turns on if exactly 3 neighbors are on, and stays off otherwise.
- */
-
 bool isValidPosition(int i, int j, std::vector<std::string> grid){
   return i >= 0 && i < grid.size() && j >= 0 && j < grid[i].size();
 }
